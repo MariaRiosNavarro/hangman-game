@@ -86,6 +86,6 @@ main {
   font-weight: 700;
 }
 
-.letter:disabled {
-  visibility: hidden;
+.letter-invisible {
+  color: transparent;
 }
