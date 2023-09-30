@@ -53,3 +53,9 @@ main {
   border: none;
   background-color: lightskyblue;
 }
+
+.output-text {
+  background-color: whitesmoke;
+  height: 3rem;
+  width: 100%;
+}

@@ -63,8 +63,21 @@ for (const letter of alphabet) {
   alphabetContainer.append(letterButton);
   letterButton.textContent = letter;
   letterButton.classList.add("letter-btn");
+  // 2.a - Add event listener for the Buttons
   letterButton.addEventListener("click", () => {
-    //   if we click button ist after that disable
+    // 2.b - if we click button ist after that disable
     letterButton.disabled = true;
   });
 }
+
+// 3.- Add event listener to play button
+
+playBtn.addEventListener("click", () => {
+  // 3a.-Add to give a new Random word
+  let randomWord = "";
+  let randomNumber = Math.floor(Math.random() * words.length);
+  randomWord = words[randomNumber];
+  console.log(randomWord);
+
+  output.innerHTML = randomWord;
+});
