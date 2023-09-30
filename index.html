@@ -4,12 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/styles.css" />
-    <title>Document</title>
+    <title>Hangman</title>
   </head>
   <body>
-    <header></header>
-    <main></main>
-    <footer></footer>
+    <header>Hangman</header>
+    <main>
+      <article class="round">
+        Round: <span class="round-counter" data-js="round-counter" ="">0</span>
+      </article>
+      <article class="alphabet-btn" data-js="alphabet-btn"></article>
+      <article class="output">
+        <p data-js="output"></p>
+        <button>Hit me again</button>
+      </article>
+    </main>
     <script src="./assets/js/main.js"></script>
   </body>
 </html>
