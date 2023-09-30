@@ -65,8 +65,27 @@ main {
 
 .output {
   background-color: whitesmoke;
-  height: 3rem;
+  height: 4rem;
   width: 100%;
   margin: 0;
   border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.border-bottom {
+  display: inline;
+  padding: 0.5rem;
+  border-bottom: 1px solid gray;
+  margin: 0.5rem;
+}
+
+.letter {
+  font-weight: 700;
+}
+
+.letter:disabled {
+  visibility: hidden;
 }

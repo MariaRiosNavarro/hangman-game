@@ -76,8 +76,24 @@ playBtn.addEventListener("click", () => {
   // 3a.-Add to give a new Random word
   let randomWord = "";
   let randomNumber = Math.floor(Math.random() * words.length);
-  randomWord = words[randomNumber];
+  randomWord = words[randomNumber].toUpperCase();
   console.log(randomWord);
+  let wordArray = Array.from(randomWord);
+  //   3b.- create ein container and letter(inside)
 
-  output.innerHTML = randomWord;
+  //   3c.- Map the word array and create for each word one container and letter inside
+
+  let outputWord = "";
+
+  outputWord = wordArray.map((letterInArray) => {
+    const letterContainer = document.createElement("div");
+    letterContainer.classList.add("border-bottom");
+    const letter = document.createElement("span");
+    letter.classList.add("letter");
+    letter.textContent = letterInArray;
+    letterContainer.append(letter);
+    output.append(letterContainer);
+  });
+
+  //   output.innerHTML = randomWord;
 });
