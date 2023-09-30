@@ -6,6 +6,39 @@
   padding: 0;
 }
 
+html {
+  font-size: 62.5%;
+  font-family: helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
 main {
   margin: 5rem;
+  padding: 2rem;
+  background-color: lightgrey;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 2rem;
+  min-width: 290px;
+  min-height: 450px;
+}
+
+.letter-btn {
+  border-radius: 50%;
+  padding: 0.5rem 0.8rem;
+  border: none;
+  border: 2px solid green;
+  background-color: lightgreen;
+}
+
+.play-btn {
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: lightskyblue;
 }
