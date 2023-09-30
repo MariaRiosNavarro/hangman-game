@@ -58,12 +58,15 @@ main {
   border: none;
   background-color: lightskyblue;
   width: 100%;
+  color: blue;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.output-text {
+.output {
   background-color: whitesmoke;
   height: 3rem;
   width: 100%;
-  margin: 2rem 0;
+  margin: 0;
   border-radius: 3px;
 }
