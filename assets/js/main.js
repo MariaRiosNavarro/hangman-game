@@ -57,8 +57,14 @@ const playBtn = document.querySelector('[data-js="play-btn"]');
 
 // 2.- Create Alphabet buttons
 const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
-const letterButton = document.createElement("button");
 
-alphabetContainer.append(letterButton);
-letterButton.textContent = "A";
-letterButton.classList.add("letter-btn");
+for (const letter of alphabet) {
+  const letterButton = document.createElement("button");
+  alphabetContainer.append(letterButton);
+  letterButton.textContent = letter;
+  letterButton.classList.add("letter-btn");
+  letterButton.addEventListener("click", () => {
+    //   if we click button ist after that disable
+    letterButton.disabled = true;
+  });
+}
