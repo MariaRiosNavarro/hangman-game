@@ -18,3 +18,47 @@ const words = [
   "Zeitgeist",
   "Zugzwang",
 ];
+
+const alphabet = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+  "ß",
+];
+
+//   1.-Save Variables data-js="round-counter", data-js="alphabet-btn", "play-btn"
+
+const roundCounter = document.querySelector('[data-js="round-counter"]');
+const output = document.querySelector('[data-js="output"]');
+const playBtn = document.querySelector('[data-js="play-btn"]');
+
+// 2.- Create Alphabet buttons
+const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
+const letterButton = document.createElement("button");
+
+alphabetContainer.append(letterButton);
+letterButton.textContent = "A";
+letterButton.classList.add("letter-btn");
