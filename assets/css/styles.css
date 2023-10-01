@@ -168,8 +168,10 @@ main {
   display: block;
   background-color: red;
   letter-spacing: 0.2rem;
-  margin: 0.3rem;
-  padding: 0.3rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 3px;
+  font-size: 1.5rem;
   color: beige;
   font-weight: 700;
 }

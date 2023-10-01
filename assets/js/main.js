@@ -18,6 +18,7 @@ alphabet = germanAlphabet;
 const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
 const title = document.querySelector('[data-js="title"]');
 const playBtn = document.querySelector('[data-js="play-btn"]');
+const roundCounter = document.querySelector('[data-js="round-counter"]');
 
 let alphabetButtons = [];
 alphabetContainer.innerHTML = `<p class="alert">Please choose your language</p><br><p class="alert" >Bitte wählen sie ihre Sprache</p><br><p class="alert">Por favor elija su idioma</p><br>`;
@@ -29,6 +30,7 @@ let lostMessage = "";
 
 const changeLanguage = () => {
   // remove old values
+  roundCounter.innerHTML = "0";
   alphabetContainer.innerHTML = "";
   output.innerHTML = "";
   winOutput.innerHTML = "";
@@ -65,7 +67,6 @@ const changeLanguage = () => {
 
 //   1.-Save Variables
 
-const roundCounter = document.querySelector('[data-js="round-counter"]');
 const winOutput = document.querySelector('[data-js="win-output"]');
 const output = document.querySelector('[data-js="output"]');
 
@@ -137,6 +138,8 @@ playBtn.addEventListener("click", () => {
   let randomNumber = Math.floor(Math.random() * words.length);
   randomWord = words[randomNumber].toUpperCase();
   let wordArray = Array.from(randomWord);
+
+  console.log(randomWord);
 
   // 3a.-the lenght of the Array give the rounds for the word with initial value of 6;
   let wordArrayLenghtAndInitialValue = wordArray.length + 6;
