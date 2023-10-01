@@ -55,6 +55,7 @@ const alphabet = [
 const roundCounter = document.querySelector('[data-js="round-counter"]');
 const output = document.querySelector('[data-js="output"]');
 const playBtn = document.querySelector('[data-js="play-btn"]');
+const winLostOutput = document.querySelector('[data-js="round-container"]');
 
 // 2.- Create Alphabet buttons
 const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
@@ -75,15 +76,10 @@ const createLetterButtons = () => {
 
 createLetterButtons();
 
-console.log("here", alphabetButtons);
-
-console.log("here2", alphabetButtons[0].textContent);
-
-// 3.- Add event listener to play button
+// 3.- Create help Variables & add eventListener for play button
 
 let outputWord = [];
 let wordLetters = [];
-
 let letterContainer, letter;
 
 playBtn.addEventListener("click", () => {
@@ -101,14 +97,16 @@ playBtn.addEventListener("click", () => {
   let wordArray = Array.from(randomWord);
 
   //   now we can use the array outside
-  wordLetters = wordArray;
-  //   3b.- create ein container and letter(inside)
+
+  // wordLetters = wordArray;
+
+  //   3b.- Click event for each Alphabet button,
 
   for (const letterButton of alphabetButtons) {
     letterButton.addEventListener("click", () => {
       // 2.b - if we click button ist after that disable
       letterButton.disabled = true;
-      //   letterVisibilityOn();
+      let allLettersVisible = true;
       for (const letterContainer of outputWord) {
         let letterOut = letterContainer.textContent;
         if (letterOut === letterButton.textContent) {
@@ -120,8 +118,15 @@ playBtn.addEventListener("click", () => {
         } else {
           console.log("dont!");
         }
+        // here we check of all letter are visible for the output win/lost
+        if (letterContainer.children[0].style.visibility !== "visible") {
+          allLettersVisible = false;
+        }
       }
-
+      if (allLettersVisible) {
+        console.log("win!");
+        winLostOutput.innerHTML += `<p class="win-output">You WIN 🏆</p>`;
+      }
       return outputWord;
     });
   }

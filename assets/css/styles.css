@@ -89,3 +89,25 @@ main {
 .letter-invisible {
   color: transparent;
 }
+
+.round {
+  border: 1px solid gray;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.win-output {
+  font-size: 1.5rem;
+  background-color: lightgoldenrodyellow;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin: 0.5;
+}
