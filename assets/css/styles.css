@@ -29,6 +29,13 @@ main {
   min-height: 450px;
 }
 
+.alphabet-btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
 .round {
   text-align: center;
 }
