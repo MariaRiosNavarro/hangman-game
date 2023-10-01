@@ -8,9 +8,45 @@ import {
 } from "./data.js";
 
 let words = [];
-words = germanWords;
 let alphabet = [];
-alphabet = germanAlphabet;
+
+// 2.- Create Alphabet buttons
+
+const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
+
+let alphabetButtons = [];
+
+// EXTRA MULTILINGUAL
+
+const changeLanguage = () => {
+  alphabetContainer.innerHTML = "";
+  let germanTrue = german.checked;
+  let englishTrue = english.checked;
+  let spanishTrue = spanish.checked;
+  switch (true) {
+    case germanTrue:
+      alphabet = germanAlphabet;
+      words = germanWords;
+      console.log("in2", words);
+      break;
+    case englishTrue:
+      alphabet = englishAlphabet;
+      words = englishWords;
+      console.log("in2", words);
+      break;
+    case spanishTrue:
+      alphabet = spanishAlphabet;
+      words = spanishWords;
+      console.log("in3", words);
+      break;
+    default:
+      alphabet = germanAlphabet;
+      words = germanWords;
+      console.log("in4", words);
+      break;
+  }
+  createLetterButtons();
+};
 
 //   1.-Save Variables
 
@@ -19,10 +55,19 @@ const winOutput = document.querySelector('[data-js="win-output"]');
 const output = document.querySelector('[data-js="output"]');
 const playBtn = document.querySelector('[data-js="play-btn"]');
 
-// 2.- Create Alphabet buttons
-const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
+// EXTRA-MULTILINGUAL:
 
-let alphabetButtons = [];
+const german = document.querySelector('[data-js="german"]');
+const english = document.querySelector('[data-js="english"]');
+const spanish = document.querySelector('[data-js="spanish"]');
+
+german.addEventListener("change", changeLanguage);
+english.addEventListener("change", changeLanguage);
+spanish.addEventListener("change", changeLanguage);
+
+console.log("ou", words);
+
+// ---
 
 const createLetterButtons = () => {
   for (const letter of alphabet) {
@@ -35,7 +80,7 @@ const createLetterButtons = () => {
   return alphabetContainer;
 };
 
-createLetterButtons();
+// createLetterButtons();
 
 // 3.- Create help Variables & add eventListener for play button
 

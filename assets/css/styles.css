@@ -30,6 +30,14 @@ nav img {
   z-index: 5;
 }
 
+nav img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 5;
+}
+
 nav input {
   position: relative;
   right: 3.4rem;
