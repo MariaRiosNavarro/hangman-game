@@ -127,7 +127,7 @@ playBtn.addEventListener("click", () => {
   // new game, remove word, disables buttons and win/lost output
   output.innerHTML = "";
   winOutput.innerHTML = "";
-  roundCounter.innerHTML = 0;
+  roundCounter.innerHTML = "";
   for (const letterButton of alphabetButtons) {
     letterButton.disabled = false;
   }
@@ -140,12 +140,10 @@ playBtn.addEventListener("click", () => {
   let wordArray = Array.from(randomWord);
 
   console.log(randomWord);
-
   // 3a.-the lenght of the Array give the rounds for the word with initial value of 6;
   let wordArrayLenghtAndInitialValue = wordArray.length + 6;
-  roundCounter.textContent = wordArrayLenghtAndInitialValue;
-  let numberCounter = roundCounter.textContent;
-
+  roundCounter.innerHTML = wordArrayLenghtAndInitialValue;
+  let numberCounter = Number(roundCounter.innerHTML);
   //   3b.- Click event for each Alphabet button,
 
   for (const letterButton of alphabetButtons) {
@@ -157,13 +155,15 @@ playBtn.addEventListener("click", () => {
       let newCounter;
       if (numberCounter >= 0) {
         newCounter = numberCounter--;
-        roundCounter.textContent = newCounter;
+        roundCounter.innerHTML = newCounter;
+        console.log("roundCounter A", roundCounter.innerHTML);
       }
       //  3.b3 - handle lost message
       if (newCounter === 0) {
+        console.log("roundCounter", roundCounter.innerHTML);
         winOutput.innerHTML = lostMessage;
-        roundCounter.textContent = 0;
-        console.log("roundCounter", roundCounter.textContent);
+        roundCounter.innerHTML = 0;
+        console.log("roundCounter danach", roundCounter.innerHTML);
       }
       // 3.b4 - change the visibility of the output letter if we hit the correct letter
       for (const letterContainer of outputWord) {
@@ -184,7 +184,7 @@ playBtn.addEventListener("click", () => {
       if (allLettersVisible && newCounter >= 0) {
         console.log("win!");
         winOutput.innerHTML = winMessage;
-        roundCounter.textContent = 0;
+        roundCounter.innerHTML = 0;
       }
 
       return outputWord;
