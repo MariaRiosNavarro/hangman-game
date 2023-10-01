@@ -9,6 +9,42 @@
   <body>
     <main>
       <h1>Hangman</h1>
+      <nav>
+        <label for="german">
+          <img src="./assets/img/de.svg" alt="german icon" />
+          <input
+            type="radio"
+            name="language"
+            value="german"
+            id="german"
+            onclick="changeLanguage()"
+            data-js="german"
+            checked
+          />
+        </label>
+        <label for="english">
+          <img src="./assets/img/sh.svg" alt="english icon" />
+          <input
+            type="radio"
+            name="language"
+            value="english"
+            id="english"
+            data-js="english"
+            onclick="changeLanguage()"
+          />
+        </label>
+        <label for="spanish">
+          <img src="./assets/img/es.svg" alt="spanish icon" />
+          <input
+            type="radio"
+            name="language"
+            value="spanish"
+            id="spanish"
+            data-js="spanish"
+            onclick="changeLanguage()"
+          />
+        </label>
+      </nav>
       <article class="round" data-js="round-container">
         <p>
           Round: <span class="round-counter" data-js="round-counter">6</span>

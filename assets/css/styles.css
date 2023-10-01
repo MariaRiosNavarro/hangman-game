@@ -16,6 +16,26 @@ h1 {
   text-align: center;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 5;
+}
+
+nav input {
+  position: relative;
+  right: 3.4rem;
+  visibility: hidden;
+}
+
 main {
   margin: 5rem;
   padding: 2rem;
