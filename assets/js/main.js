@@ -28,6 +28,7 @@ let winMessage = "";
 let lostMessage = "";
 
 const changeLanguage = () => {
+  // remove old values
   alphabetContainer.innerHTML = "";
   output.innerHTML = "";
   winOutput.innerHTML = "";
@@ -38,39 +39,29 @@ const changeLanguage = () => {
     case germanTrue:
       alphabet = germanAlphabet;
       words = germanWords;
-      // winMessage = `<p class="win-output">Sie haben gewonnen 🏆</p>`;
-      // lostMessage = `<p class="lost-output">Sie haben verloren!</p>`;
       playBtn.textContent = "spielen";
       title.textContent = "Galgen";
       break;
     case englishTrue:
       alphabet = englishAlphabet;
       words = englishWords;
-      // winMessage = `<p class="win-output">You WIN 🏆</p>`;
-      // lostMessage = `<p class="lost-output">You LOST!</p>`;
       playBtn.textContent = "play";
       title.textContent = "Hangman";
       break;
     case spanishTrue:
       alphabet = spanishAlphabet;
       words = spanishWords;
-      // winMessage = `<p class="win-output">Ganaste 🏆</p>`;
-      // lostMessage = `<p class="lost-output">Perdiste</p>`;
       playBtn.textContent = "jugar";
       title.textContent = "Ahorcado";
       break;
     default:
       alphabet = germanAlphabet;
       words = germanWords;
-      // winMessage = `<p class="win-output">Sie haben gewonnen 🏆</p>`;
-      // lostMessage = `<p class="lost-output">Sie haben verloren!</p>`;
       title.textContent = "Galgen";
       break;
   }
   createLetterButtons();
 };
-
-console.log("1", winMessage, lostMessage);
 
 //   1.-Save Variables
 
@@ -101,15 +92,13 @@ const createLetterButtons = () => {
   return alphabetContainer;
 };
 
-// createLetterButtons();
-
 // 3.- Create help Variables & add eventListener for play button
 
 let outputWord = [];
 let letterContainer, letter;
 
 playBtn.addEventListener("click", () => {
-  // MULTILINGUAL lost/win message
+  // MULTILINGUAL lost/win message save
 
   let germanTrue = german.checked;
   let englishTrue = english.checked;
