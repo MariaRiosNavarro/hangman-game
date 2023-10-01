@@ -1,23 +1,23 @@
 const words = [
   "Test",
-  //   "Abendbrot",
-  //   "Brueckentag",
-  //   "Erklaerungsnot",
-  //   "Fingerspitzengefuehl",
-  //   "Fremdschaemen",
-  //   "Geborgenheit",
-  //   "Geschmacksverirrung",
-  //   "Schweinehund",
-  //   "Kopfkino",
-  //   "Kummerspeck",
-  //   "Schnapsidee",
-  //   "Torschlusspanik",
-  //   "verabredet",
-  //   "verschlimmbessern",
-  //   "Vorfreude",
-  //   "Weltschmerz",
-  //   "Zeitgeist",
-  //   "Zugzwang",
+  "Abendbrot",
+  // "Brueckentag",
+  // "Erklaerungsnot",
+  // "Fingerspitzengefuehl",
+  // "Fremdschaemen",
+  // "Geborgenheit",
+  // "Geschmacksverirrung",
+  // "Schweinehund",
+  // "Kopfkino",
+  // "Kummerspeck",
+  // "Schnapsidee",
+  // "Torschlusspanik",
+  // "verabredet",
+  // "verschlimmbessern",
+  // "Vorfreude",
+  // "Weltschmerz",
+  // "Zeitgeist",
+  // "Zugzwang",
 ];
 
 const alphabet = [
@@ -53,9 +53,10 @@ const alphabet = [
 //   1.-Save Variables data-js="round-counter", data-js="alphabet-btn", "play-btn"
 
 const roundCounter = document.querySelector('[data-js="round-counter"]');
+const winLostOutput = document.querySelector('[data-js="round-container"]');
+const winOutput = document.querySelector('[data-js="win-output"]');
 const output = document.querySelector('[data-js="output"]');
 const playBtn = document.querySelector('[data-js="play-btn"]');
-const winLostOutput = document.querySelector('[data-js="round-container"]');
 
 // 2.- Create Alphabet buttons
 const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
@@ -79,26 +80,29 @@ createLetterButtons();
 // 3.- Create help Variables & add eventListener for play button
 
 let outputWord = [];
-let wordLetters = [];
+// let wordLetters = [];
 let letterContainer, letter;
 
 playBtn.addEventListener("click", () => {
   // new game, remove word and disables buttons
   output.innerHTML = "";
+  winOutput.innerHTML = "";
+
   for (const letterButton of alphabetButtons) {
     letterButton.disabled = false;
   }
 
-  // 3a.-Add to give a new Random word
+  // 3a.-Add to give a new Random word and check round value
+
   let randomWord = "";
   let randomNumber = Math.floor(Math.random() * words.length);
   randomWord = words[randomNumber].toUpperCase();
-  console.log(randomWord);
   let wordArray = Array.from(randomWord);
 
-  //   now we can use the array outside
-
-  // wordLetters = wordArray;
+  // 3a.-the lenght of the Array give the rounds for the word;
+  let wordArrayLenght = wordArray.length;
+  roundCounter.textContent = wordArrayLenght;
+  let numberCounter = roundCounter.textContent;
 
   //   3b.- Click event for each Alphabet button,
 
@@ -107,12 +111,23 @@ playBtn.addEventListener("click", () => {
       // 2.b - if we click button ist after that disable
       letterButton.disabled = true;
       let allLettersVisible = true;
+
+      // need a if statement becouse the counter go to negativ values
+      let newCounter;
+      if (numberCounter >= 0) {
+        newCounter = numberCounter--;
+        roundCounter.textContent = newCounter;
+      }
+
+      if (newCounter === 0) {
+        winOutput.innerHTML = `<p class="lost-output">You LOST!</p>`;
+        roundCounter.textContent = 0;
+      }
+
       for (const letterContainer of outputWord) {
         let letterOut = letterContainer.textContent;
         if (letterOut === letterButton.textContent) {
-          console.log(letterContainer);
           let letter = letterContainer.children[0];
-          console.log("child", letter);
           letter.style.visibility = "visible";
           console.log("YES");
         } else {
@@ -123,10 +138,11 @@ playBtn.addEventListener("click", () => {
           allLettersVisible = false;
         }
       }
-      if (allLettersVisible) {
+      if (allLettersVisible && newCounter >= 0) {
         console.log("win!");
-        winLostOutput.innerHTML += `<p class="win-output">You WIN 🏆</p>`;
+        winOutput.innerHTML = `<p class="win-output">You WIN 🏆</p>`;
       }
+
       return outputWord;
     });
   }

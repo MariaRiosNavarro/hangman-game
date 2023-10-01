@@ -72,18 +72,21 @@ main {
 
 .output {
   background-color: whitesmoke;
-  height: 4rem;
+  min-height: 4rem;
+  height: auto;
   width: 100%;
   margin: 0;
   border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
+  padding: 0.5rem;
 }
 
 .border-bottom {
-  display: inline;
+  display: inline-flex;
   padding: 0.5rem;
   border-bottom: 1px solid gray;
   margin: 0.5rem;
@@ -109,9 +112,23 @@ main {
   gap: 0.5rem;
 }
 
+.win-container {
+  height: 3rem;
+}
+
 .win-output {
   font-size: 1.5rem;
   background-color: lightgoldenrodyellow;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin: 0.5;
+}
+
+.lost-output {
+  font-size: 1.5rem;
+  background-color: lightcoral;
   font-weight: 700;
   text-align: center;
   padding: 0.5rem;
