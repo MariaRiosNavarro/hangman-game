@@ -19,6 +19,7 @@ const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
 const title = document.querySelector('[data-js="title"]');
 const playBtn = document.querySelector('[data-js="play-btn"]');
 const roundCounter = document.querySelector('[data-js="round-counter"]');
+const roundWord = document.querySelector('[data-js="round-word"]');
 
 let alphabetButtons = [];
 alphabetContainer.innerHTML = `<p class="alert">Please choose your language</p><br><p class="alert" >Bitte wählen sie ihre Sprache</p><br><p class="alert">Por favor elija su idioma</p><br>`;
@@ -30,7 +31,7 @@ let lostMessage = "";
 
 const changeLanguage = () => {
   // remove old values
-  roundCounter.innerHTML = "0";
+  roundCounter.innerHTML = "";
   alphabetContainer.innerHTML = "";
   output.innerHTML = "";
   winOutput.innerHTML = "";
@@ -43,23 +44,27 @@ const changeLanguage = () => {
       words = germanWords;
       playBtn.textContent = "spielen";
       title.textContent = "Galgen";
+      roundWord.innerHTML = "Anzahl der Versuche:";
       break;
     case englishTrue:
       alphabet = englishAlphabet;
       words = englishWords;
       playBtn.textContent = "play";
       title.textContent = "Hangman";
+      roundWord.innerHTML = "Number of attempts";
       break;
     case spanishTrue:
       alphabet = spanishAlphabet;
       words = spanishWords;
       playBtn.textContent = "jugar";
       title.textContent = "Ahorcado";
+      roundWord.innerHTML = "Cantidad de Intentos:";
       break;
     default:
       alphabet = germanAlphabet;
       words = germanWords;
       title.textContent = "Galgen";
+      roundWord.innerHTML = "Anzahl der Versuche:";
       break;
   }
   createLetterButtons();
@@ -82,24 +87,36 @@ spanish.addEventListener("change", changeLanguage);
 
 // 2.- Create Alphabet buttons
 
+let countNumber;
+
 const createLetterButtons = () => {
   for (const letter of alphabet) {
     let letterButton = document.createElement("button");
     alphabetContainer.append(letterButton);
     letterButton.textContent = letter;
     letterButton.classList.add("letter-btn");
+    letterButton.onclick = counterAndLostHandle;
     alphabetButtons.push(letterButton);
   }
   return alphabetContainer;
 };
 
-// 3.- Create help Variables & add eventListener for play button
+//
 
-let outputWord = [];
-let letterContainer, letter;
+const counterAndLostHandle = () => {
+  countNumber = Number(roundCounter.innerHTML);
+  console.log("r", roundCounter.innerHTML);
 
-playBtn.addEventListener("click", () => {
-  // MULTILINGUAL lost/win message save
+  if (countNumber > 0) {
+    countNumber--;
+    let newValue = countNumber;
+    if (countNumber === 0) {
+      winOutput.innerHTML = lostMessage;
+      roundCounter.innerHTML = 0;
+    } else {
+      roundCounter.innerHTML = newValue;
+    }
+  }
 
   let germanTrue = german.checked;
   let englishTrue = english.checked;
@@ -123,11 +140,20 @@ playBtn.addEventListener("click", () => {
       lostMessage = `<p class="lost-output">Sie haben verloren!</p>`;
       break;
   }
+};
 
+// MULTILINGUAL lost/win message save
+
+// 3.- Create help Variables & add eventListener for play button
+
+let outputWord = [];
+let letterContainer, letter;
+
+playBtn.addEventListener("click", () => {
   // new game, remove word, disables buttons and win/lost output
   output.innerHTML = "";
   winOutput.innerHTML = "";
-  roundCounter.innerHTML = 0;
+  roundCounter.innerHTML = "";
   for (const letterButton of alphabetButtons) {
     letterButton.disabled = false;
   }
@@ -140,31 +166,21 @@ playBtn.addEventListener("click", () => {
   let wordArray = Array.from(randomWord);
 
   console.log(randomWord);
-
   // 3a.-the lenght of the Array give the rounds for the word with initial value of 6;
   let wordArrayLenghtAndInitialValue = wordArray.length + 6;
-  roundCounter.textContent = wordArrayLenghtAndInitialValue;
-  let numberCounter = roundCounter.textContent;
+  roundCounter.innerHTML = Number(wordArrayLenghtAndInitialValue);
+  countNumber = roundCounter.innerHTML;
+  let allLettersVisible = true;
 
-  //   3b.- Click event for each Alphabet button,
-
+  // 3b.- Click event for each Alphabet button,
   for (const letterButton of alphabetButtons) {
     letterButton.addEventListener("click", () => {
+      // Restablecer allLettersVisible a true en cada clic
+      allLettersVisible = true;
+
       // 3.b1 - if we click letter button ist after that disable
       letterButton.disabled = true;
-      let allLettersVisible = true;
-      // 3.b2 - handle the counter: we need a if statement because otherwise we get negative values.
-      let newCounter;
-      if (numberCounter >= 0) {
-        newCounter = numberCounter--;
-        roundCounter.textContent = newCounter;
-      }
-      //  3.b3 - handle lost message
-      if (newCounter === 0) {
-        winOutput.innerHTML = lostMessage;
-        roundCounter.textContent = 0;
-        console.log("roundCounter", roundCounter.textContent);
-      }
+
       // 3.b4 - change the visibility of the output letter if we hit the correct letter
       for (const letterContainer of outputWord) {
         let letterOut = letterContainer.textContent;
@@ -175,18 +191,17 @@ playBtn.addEventListener("click", () => {
         } else {
           console.log("dont!");
         }
-        //  3.b5 - Win handle: here we check of all letter are visible for the output win
-
+        // 3.b5 - Win handle: here we check if all letters are visible for the output win
         if (letterContainer.children[0].style.visibility !== "visible") {
-          allLettersVisible = false;
+          allLettersVisible = false; // Si una letra no es visible, actualiza allLettersVisible a false
         }
       }
-      if (allLettersVisible && newCounter >= 0) {
-        console.log("win!");
-        winOutput.innerHTML = winMessage;
-        roundCounter.textContent = 0;
-      }
 
+      // 3.b6 - Check if all letters are visible and display win message
+      if (allLettersVisible) {
+        winOutput.innerHTML = winMessage;
+        console.log("you win");
+      }
       return outputWord;
     });
   }
