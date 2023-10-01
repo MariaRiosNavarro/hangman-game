@@ -30,7 +30,7 @@
 
 <div>
 
-<img src="./assets/img/es1.png" width="250px">
-<img src="./assets/img/es2.png" width="250px">
+<img src="./assets/img/es1.png" width="300px">
+<img src="./assets/img/es2.png" width="300px">
 
 </div>
