@@ -126,6 +126,7 @@ playBtn.addEventListener("click", () => {
   // new game, remove word, disables buttons and win/lost output
   output.innerHTML = "";
   winOutput.innerHTML = "";
+  roundCounter.innerHTML = 0;
   for (const letterButton of alphabetButtons) {
     letterButton.disabled = false;
   }
@@ -159,6 +160,7 @@ playBtn.addEventListener("click", () => {
       if (newCounter === 0) {
         winOutput.innerHTML = lostMessage;
         roundCounter.textContent = 0;
+        console.log("roundCounter", roundCounter.textContent);
       }
       // 3.b4 - change the visibility of the output letter if we hit the correct letter
       for (const letterContainer of outputWord) {
