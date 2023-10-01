@@ -10,16 +10,27 @@ import {
 let words = [];
 let alphabet = [];
 
-// 2.- Create Alphabet buttons
+words = germanWords;
+alphabet = germanAlphabet;
+
+//  EXTRA MULTILINGUAL: Save button container at the beginning, to remove the contain if we change the language and labels that will change
 
 const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
+const title = document.querySelector('[data-js="title"]');
+const playBtn = document.querySelector('[data-js="play-btn"]');
 
 let alphabetButtons = [];
+alphabetContainer.innerHTML = `<p class="alert">Please choose your language</p><br><p class="alert" >Bitte wählen sie ihre Sprache</p><br><p class="alert">Por favor elija su idioma</p><br>`;
 
-// EXTRA MULTILINGUAL
+// EXTRA MULTILINGUAL main function
+
+let winMessage = "";
+let lostMessage = "";
 
 const changeLanguage = () => {
   alphabetContainer.innerHTML = "";
+  output.innerHTML = "";
+  winOutput.innerHTML = "";
   let germanTrue = german.checked;
   let englishTrue = english.checked;
   let spanishTrue = spanish.checked;
@@ -27,33 +38,45 @@ const changeLanguage = () => {
     case germanTrue:
       alphabet = germanAlphabet;
       words = germanWords;
-      console.log("in2", words);
+      // winMessage = `<p class="win-output">Sie haben gewonnen 🏆</p>`;
+      // lostMessage = `<p class="lost-output">Sie haben verloren!</p>`;
+      playBtn.textContent = "spielen";
+      title.textContent = "Galgen";
       break;
     case englishTrue:
       alphabet = englishAlphabet;
       words = englishWords;
-      console.log("in2", words);
+      // winMessage = `<p class="win-output">You WIN 🏆</p>`;
+      // lostMessage = `<p class="lost-output">You LOST!</p>`;
+      playBtn.textContent = "play";
+      title.textContent = "Hangman";
       break;
     case spanishTrue:
       alphabet = spanishAlphabet;
       words = spanishWords;
-      console.log("in3", words);
+      // winMessage = `<p class="win-output">Ganaste 🏆</p>`;
+      // lostMessage = `<p class="lost-output">Perdiste</p>`;
+      playBtn.textContent = "jugar";
+      title.textContent = "Ahorcado";
       break;
     default:
       alphabet = germanAlphabet;
       words = germanWords;
-      console.log("in4", words);
+      // winMessage = `<p class="win-output">Sie haben gewonnen 🏆</p>`;
+      // lostMessage = `<p class="lost-output">Sie haben verloren!</p>`;
+      title.textContent = "Galgen";
       break;
   }
   createLetterButtons();
 };
+
+console.log("1", winMessage, lostMessage);
 
 //   1.-Save Variables
 
 const roundCounter = document.querySelector('[data-js="round-counter"]');
 const winOutput = document.querySelector('[data-js="win-output"]');
 const output = document.querySelector('[data-js="output"]');
-const playBtn = document.querySelector('[data-js="play-btn"]');
 
 // EXTRA-MULTILINGUAL:
 
@@ -65,9 +88,7 @@ german.addEventListener("change", changeLanguage);
 english.addEventListener("change", changeLanguage);
 spanish.addEventListener("change", changeLanguage);
 
-console.log("ou", words);
-
-// ---
+// 2.- Create Alphabet buttons
 
 const createLetterButtons = () => {
   for (const letter of alphabet) {
@@ -88,6 +109,31 @@ let outputWord = [];
 let letterContainer, letter;
 
 playBtn.addEventListener("click", () => {
+  // MULTILINGUAL lost/win message
+
+  let germanTrue = german.checked;
+  let englishTrue = english.checked;
+  let spanishTrue = spanish.checked;
+
+  switch (true) {
+    case germanTrue:
+      winMessage = `<p class="win-output">Sie haben gewonnen 🏆</p>`;
+      lostMessage = `<p class="lost-output">Sie haben verloren!</p>`;
+      break;
+    case englishTrue:
+      winMessage = `<p class="win-output">You WIN 🏆</p>`;
+      lostMessage = `<p class="lost-output">You LOST!</p>`;
+      break;
+    case spanishTrue:
+      winMessage = `<p class="win-output">Ganaste 🏆</p>`;
+      lostMessage = `<p class="lost-output">Perdiste</p>`;
+      break;
+    default:
+      winMessage = `<p class="win-output">Sie haben gewonnen 🏆</p>`;
+      lostMessage = `<p class="lost-output">Sie haben verloren!</p>`;
+      break;
+  }
+
   // new game, remove word, disables buttons and win/lost output
   output.innerHTML = "";
   winOutput.innerHTML = "";
@@ -122,7 +168,7 @@ playBtn.addEventListener("click", () => {
       }
       //  3.b3 - handle lost message
       if (newCounter === 0) {
-        winOutput.innerHTML = `<p class="lost-output">You LOST!</p>`;
+        winOutput.innerHTML = lostMessage;
         roundCounter.textContent = 0;
       }
       // 3.b4 - change the visibility of the output letter if we hit the correct letter
@@ -143,7 +189,7 @@ playBtn.addEventListener("click", () => {
       }
       if (allLettersVisible && newCounter >= 0) {
         console.log("win!");
-        winOutput.innerHTML = `<p class="win-output">You WIN 🏆</p>`;
+        winOutput.innerHTML = winMessage;
       }
 
       return outputWord;

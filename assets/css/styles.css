@@ -163,3 +163,13 @@ main {
   border-radius: 5px;
   margin: 0.5;
 }
+
+.alert {
+  display: block;
+  background-color: red;
+  letter-spacing: 0.2rem;
+  margin: 0.3rem;
+  padding: 0.3rem;
+  color: beige;
+  font-weight: 700;
+}
