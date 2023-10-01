@@ -1,59 +1,20 @@
-const words = [
-  "Test",
-  "Abendbrot",
-  // "Brueckentag",
-  // "Erklaerungsnot",
-  // "Fingerspitzengefuehl",
-  // "Fremdschaemen",
-  // "Geborgenheit",
-  // "Geschmacksverirrung",
-  // "Schweinehund",
-  // "Kopfkino",
-  // "Kummerspeck",
-  // "Schnapsidee",
-  // "Torschlusspanik",
-  // "verabredet",
-  // "verschlimmbessern",
-  // "Vorfreude",
-  // "Weltschmerz",
-  // "Zeitgeist",
-  // "Zugzwang",
-];
+import {
+  germanWords,
+  germanAlphabet,
+  spanishWords,
+  spanishAlphabet,
+  englishWords,
+  englishAlphabet,
+} from "./data.js";
 
-const alphabet = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-  "ß",
-];
+let words = [];
+words = germanWords;
+let alphabet = [];
+alphabet = germanAlphabet;
 
-//   1.-Save Variables data-js="round-counter", data-js="alphabet-btn", "play-btn"
+//   1.-Save Variables
 
 const roundCounter = document.querySelector('[data-js="round-counter"]');
-const winLostOutput = document.querySelector('[data-js="round-container"]');
 const winOutput = document.querySelector('[data-js="win-output"]');
 const output = document.querySelector('[data-js="output"]');
 const playBtn = document.querySelector('[data-js="play-btn"]');
@@ -61,10 +22,9 @@ const playBtn = document.querySelector('[data-js="play-btn"]');
 // 2.- Create Alphabet buttons
 const alphabetContainer = document.querySelector('[data-js="alphabet-btn"]');
 
-let alphabetButtons;
+let alphabetButtons = [];
 
 const createLetterButtons = () => {
-  alphabetButtons = [];
   for (const letter of alphabet) {
     let letterButton = document.createElement("button");
     alphabetContainer.append(letterButton);
@@ -80,14 +40,12 @@ createLetterButtons();
 // 3.- Create help Variables & add eventListener for play button
 
 let outputWord = [];
-// let wordLetters = [];
 let letterContainer, letter;
 
 playBtn.addEventListener("click", () => {
-  // new game, remove word and disables buttons
+  // new game, remove word, disables buttons and win/lost output
   output.innerHTML = "";
   winOutput.innerHTML = "";
-
   for (const letterButton of alphabetButtons) {
     letterButton.disabled = false;
   }
@@ -99,7 +57,7 @@ playBtn.addEventListener("click", () => {
   randomWord = words[randomNumber].toUpperCase();
   let wordArray = Array.from(randomWord);
 
-  // 3a.-the lenght of the Array give the rounds for the word;
+  // 3a.-the lenght of the Array give the rounds for the word with initial value of 6;
   let wordArrayLenghtAndInitialValue = wordArray.length + 6;
   roundCounter.textContent = wordArrayLenghtAndInitialValue;
   let numberCounter = roundCounter.textContent;
@@ -108,23 +66,21 @@ playBtn.addEventListener("click", () => {
 
   for (const letterButton of alphabetButtons) {
     letterButton.addEventListener("click", () => {
-      // 2.b - if we click button ist after that disable
+      // 3.b1 - if we click letter button ist after that disable
       letterButton.disabled = true;
       let allLettersVisible = true;
-
-      // need a if statement becouse the counter go to negativ values
+      // 3.b2 - handle the counter: we need a if statement because otherwise we get negative values.
       let newCounter;
-
       if (numberCounter >= 0) {
         newCounter = numberCounter--;
         roundCounter.textContent = newCounter;
       }
-
+      //  3.b3 - handle lost message
       if (newCounter === 0) {
         winOutput.innerHTML = `<p class="lost-output">You LOST!</p>`;
         roundCounter.textContent = 0;
       }
-
+      // 3.b4 - change the visibility of the output letter if we hit the correct letter
       for (const letterContainer of outputWord) {
         let letterOut = letterContainer.textContent;
         if (letterOut === letterButton.textContent) {
@@ -134,7 +90,8 @@ playBtn.addEventListener("click", () => {
         } else {
           console.log("dont!");
         }
-        // here we check of all letter are visible for the output win/lost
+        //  3.b5 - Win handle: here we check of all letter are visible for the output win
+
         if (letterContainer.children[0].style.visibility !== "visible") {
           allLettersVisible = false;
         }
@@ -163,6 +120,3 @@ playBtn.addEventListener("click", () => {
 
   return outputWord;
 });
-
-// console.log("ARRAY", outputWord);
-// Add Buttons eventL
