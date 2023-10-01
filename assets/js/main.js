@@ -22,7 +22,7 @@ const roundCounter = document.querySelector('[data-js="round-counter"]');
 const roundWord = document.querySelector('[data-js="round-word"]');
 
 let alphabetButtons = [];
-alphabetContainer.innerHTML = `<p class="alert">Please choose your language</p><br><p class="alert" >Bitte wählen sie ihre Sprache</p><br><p class="alert">Por favor elija su idioma</p><br>`;
+alphabetContainer.innerHTML = `<p class="alert">Please choose your language and then play</p><br><p class="alert" >Bitte wählen sie ihre Sprache und clicken Sie auf spielen</p><br><p class="alert">Por favor elija su idioma y clique a jugar</p><br>`;
 
 // EXTRA MULTILINGUAL main function
 
@@ -101,7 +101,7 @@ const createLetterButtons = () => {
   return alphabetContainer;
 };
 
-//
+// 2b create te onclick function (to handle the counter and lost message) for the letters buttons
 
 const counterAndLostHandle = () => {
   countNumber = Number(roundCounter.innerHTML);
@@ -117,6 +117,8 @@ const counterAndLostHandle = () => {
       roundCounter.innerHTML = newValue;
     }
   }
+
+  // MULTILINGUAL lost/win message save
 
   let germanTrue = german.checked;
   let englishTrue = english.checked;
@@ -142,8 +144,6 @@ const counterAndLostHandle = () => {
   }
 };
 
-// MULTILINGUAL lost/win message save
-
 // 3.- Create help Variables & add eventListener for play button
 
 let outputWord = [];
@@ -165,17 +165,17 @@ playBtn.addEventListener("click", () => {
   randomWord = words[randomNumber].toUpperCase();
   let wordArray = Array.from(randomWord);
 
-  console.log(randomWord);
   // 3a.-the lenght of the Array give the rounds for the word with initial value of 6;
+
   let wordArrayLenghtAndInitialValue = wordArray.length + 6;
   roundCounter.innerHTML = Number(wordArrayLenghtAndInitialValue);
   countNumber = roundCounter.innerHTML;
   let allLettersVisible = true;
 
-  // 3b.- Click event for each Alphabet button,
+  // 3b.- Click event for each Alphabet button to handle the visibiloty and the win message
   for (const letterButton of alphabetButtons) {
     letterButton.addEventListener("click", () => {
-      // Restablecer allLettersVisible a true en cada clic
+      //  allLettersVisible  true after click
       allLettersVisible = true;
 
       // 3.b1 - if we click letter button ist after that disable
@@ -187,13 +187,10 @@ playBtn.addEventListener("click", () => {
         if (letterOut === letterButton.textContent) {
           let letter = letterContainer.children[0];
           letter.style.visibility = "visible";
-          console.log("YES");
-        } else {
-          console.log("dont!");
         }
         // 3.b5 - Win handle: here we check if all letters are visible for the output win
         if (letterContainer.children[0].style.visibility !== "visible") {
-          allLettersVisible = false; // Si una letra no es visible, actualiza allLettersVisible a false
+          allLettersVisible = false; // if one letter is not visible, update allLettersVisible to false
         }
       }
 
