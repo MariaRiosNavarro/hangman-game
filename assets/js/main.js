@@ -100,8 +100,8 @@ playBtn.addEventListener("click", () => {
   let wordArray = Array.from(randomWord);
 
   // 3a.-the lenght of the Array give the rounds for the word;
-  let wordArrayLenght = wordArray.length;
-  roundCounter.textContent = wordArrayLenght;
+  let wordArrayLenghtAndInitialValue = wordArray.length + 6;
+  roundCounter.textContent = wordArrayLenghtAndInitialValue;
   let numberCounter = roundCounter.textContent;
 
   //   3b.- Click event for each Alphabet button,
@@ -114,6 +114,7 @@ playBtn.addEventListener("click", () => {
 
       // need a if statement becouse the counter go to negativ values
       let newCounter;
+
       if (numberCounter >= 0) {
         newCounter = numberCounter--;
         roundCounter.textContent = newCounter;
