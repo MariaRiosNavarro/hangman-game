@@ -184,6 +184,7 @@ playBtn.addEventListener("click", () => {
       if (allLettersVisible && newCounter >= 0) {
         console.log("win!");
         winOutput.innerHTML = winMessage;
+        roundCounter.textContent = 0;
       }
 
       return outputWord;
