@@ -1,6 +1,6 @@
 # hangman-game multilingual
 
-#[GitHub Pages Deployment]()
+# [GitHub Pages Deployment](https://mariariosnavarro.github.io/hangman-game/)
 
 <div>
 
