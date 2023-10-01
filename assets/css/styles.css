@@ -181,6 +181,7 @@ main {
     width: 100vw;
     height: 100vh;
     margin: 0;
-    padding: 6rem 3rem;
+    padding: 8rem 3rem;
+    gap: 1rem;
   }
 }
